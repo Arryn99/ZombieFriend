@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, ZombieFriends!</string>
+    <string name="app_name">ZombieFriends</string>
+    <string name="start_game">Start Game</string>
+    <string name="main_menu">Zombie Friends!</string>
+    <string name="play_game">Play</string>
+    <string name="help_game">Help</string>
+    <string name="quit_game">Quit</string>
+    <string name="help_screen">Help</string>
+    <string name="return_menu">Return to Main Menu</string>
+    <string name="game_over">Game Over</string>
+    <string name="return_to_menu">Return to Main Menu</string>
+    <string name="high_scores">High Scores</string>
+    <string name="how_to_play">Use your finger to flick your friends away before they reach you! Each friend counts as 1 point. Once you have been hit 5 times, the game ends.</string>
+
+    <style name="ButtonText">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+
+</resources>

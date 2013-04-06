@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/bluebutton" >
+
+        <Button
+            android:id="@+id/returnMenu"
+            style="@style/ButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/redbutton"
+            android:text="@string/return_to_menu" />
+
+        <EditText
+            android:id="@+id/NameEntry"
+            style="@style/ButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:ems="10" />
+
+        <TextView
+            android:id="@+id/textView1"
+            style="@style/ButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/editText1"
+            android:layout_centerHorizontal="true"
+            android:text="@string/game_over"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            style="@style/ButtonText"
+            android:paddingTop = "10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/NameEntry"
+            android:layout_alignLeft="@+id/NameEntry"
+            android:layout_alignRight="@+id/NameEntry"
+            android:text="Enter your name to save your score."
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </RelativeLayout>
