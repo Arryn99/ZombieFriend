@@ -35,6 +35,10 @@ public class SplashActivity extends Activity
 		};
 		pause.start();
 	}
+	
+	  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	       
+	    }
 }
 
 

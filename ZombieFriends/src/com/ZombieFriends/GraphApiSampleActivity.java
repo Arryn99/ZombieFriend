@@ -1,59 +1,83 @@
-package com.ZombieFriends.Menu.Activities;
+/**
+ * Copyright 2010-present Facebook.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
+package com.ZombieFriends;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageButton;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
-import com.ZombieFriends.R;
+import com.facebook.FacebookRequestError;
+import com.facebook.LoggingBehavior;
+import com.facebook.Request;
+import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.Session.StatusCallback;
 import com.facebook.SessionState;
+import com.facebook.Settings;
+import com.facebook.model.GraphObject;
 
-public class Login extends Activity
-{
-	 static final String PENDING_REQUEST_BUNDLE_KEY = "com.facebook.a.graphapi:PendingRequest";
-	  static final String applicationId = "272006619601451";
-	private static final String TAG = "FacebookActivity";
-	ImageButton Login;
-	ProgressDialog mDialog;
+public class GraphApiSampleActivity extends Activity {
+    static final String applicationId = "272006619601451";
+    static final String PENDING_REQUEST_BUNDLE_KEY = "com.facebook.hello.graphapi:PendingRequest";
 
-	Session session;
-	boolean pendingRequest;
-	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.login);
-		Login = (ImageButton)findViewById(R.id.Login);
-		Login.setOnClickListener(new OnClickListener()
-		{
+    Button buttonRequest;
+    EditText editRequests;
+    TextView textViewResults;
+    Session session;
+    boolean pendingRequest;
 
-			@Override
-			public void onClick(View v)
-			{
-				//login to facebook
-				onClickRequest();	
-			}
-		});
-		this.session = createSession();
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        this.buttonRequest = (Button) findViewById(R.id.buttonRequest);
+        this.buttonRequest.setOnClickListener(new OnClickListener() {
+            public void onClick(View view) {
+                onClickRequest();
+            }
+        });
+        this.editRequests = (EditText) findViewById(R.id.editRequests);
+        this.textViewResults = (TextView) findViewById(R.id.textViewResults);
 
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (this.session.onActivityResult(this, requestCode, resultCode, data) && pendingRequest && this.session.getState().isOpened()) {
-            sendRequests();
+        this.session = createSession();
+        Settings.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (this.session.onActivityResult(this, requestCode, resultCode, data) &&
+                pendingRequest &&
+                this.session.getState().isOpened()) {
+          //  sendRequests();
         }
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+
         pendingRequest = savedInstanceState.getBoolean(PENDING_REQUEST_BUNDLE_KEY, pendingRequest);
     }
 
@@ -66,17 +90,17 @@ public class Login extends Activity
 
     private void onClickRequest() {
         if (this.session.isOpened()) {
-            sendRequests();
+           // sendRequests();
         } else {
             StatusCallback callback = new StatusCallback() {
                 public void call(Session session, SessionState state, Exception exception) {
                     if (exception != null) {
-                        new AlertDialog.Builder(Login.this)
+                        new AlertDialog.Builder(GraphApiSampleActivity.this)
                                 .setTitle(R.string.login_failed_dialog_title)
                                 .setMessage(exception.getMessage())
                                 .setPositiveButton(R.string.ok_button, null)
                                 .show();
-                        Login.this.session = createSession();
+                        GraphApiSampleActivity.this.session = createSession();
                     }
                 }
             };
@@ -86,7 +110,7 @@ public class Login extends Activity
     }
 
     private void sendRequests() {
-   /*     textViewResults.setText("");
+        textViewResults.setText("");
 
         String requestIdsText = editRequests.getText().toString();
         String[] requestIds = requestIdsText.split(",");
@@ -113,7 +137,7 @@ public class Login extends Activity
             }));
         }
         pendingRequest = false;
-        Request.executeBatchAndWait(requests);*/
+        Request.executeBatchAndWait(requests);
     }
 
     private Session createSession() {
