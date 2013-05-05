@@ -32,6 +32,11 @@ public abstract class GameObject
 	{
 		mBitmap = BitmapFactory.decodeResource(context.getResources(),resourceID);
 	}
+	
+	public void setBitmap( Bitmap bitmap)
+	{
+		mBitmap = bitmap;
+	}
 
 	public void keepObjectOnScreen()
 	{

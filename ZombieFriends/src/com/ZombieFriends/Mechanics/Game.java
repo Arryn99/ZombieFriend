@@ -54,7 +54,8 @@ public class Game extends GameThread
 	static public void incrementScore()
 	{
 		score++;	//add 1 to the score
-		scoreTextView.setText("Score: " + score);	//display the score
+		if(scoreTextView != null)
+			scoreTextView.setText("Score: " + score);	//display the score
 	}
 
 	@Override

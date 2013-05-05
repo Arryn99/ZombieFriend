@@ -35,6 +35,10 @@ public class Vector
 	{
 		this.y = y;
 	}
+	
+	public int sqrMag(){
+		return (int) ((x*x) + (y*y));	
+	}
 
 	public static Vector add(Vector a, Vector b)	//create a new vector that is the sum of two vectors
 	{

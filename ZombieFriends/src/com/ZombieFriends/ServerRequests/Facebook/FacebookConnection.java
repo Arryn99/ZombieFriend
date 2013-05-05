@@ -66,6 +66,7 @@ class FacebookConnection
 	                    if (exception != null) {
 	                        FacebookConnection.this.session = createSession(activity);
 	                    }
+	                    mFacebookInterface.signInSuccess();
 	                }
 	            };
 	            pendingRequest = true;
@@ -83,13 +84,14 @@ class FacebookConnection
 			public void onCompleted(Response response) {
 				GraphObject graphObject = response.getGraphObject();
 				FacebookRequestError error = response.getError();
+				FacebookFriend friends[] = null;
 				String errorString = "";
 				if (graphObject != null) {
 					JSONObject object = graphObject.getInnerJSONObject();
 					try
 					{
 						JSONArray array = object.getJSONArray("data");
-						FacebookFriend friends[] = new FacebookFriend[array.length()]; 
+						friends = new FacebookFriend[array.length()]; 
 						for (int i=0; i<array.length(); i++)
 						{
 
@@ -101,20 +103,22 @@ class FacebookConnection
 							FacebookFriend friend = new FacebookFriend(name, id, "https://graph.facebook.com/" +
 									id + "/picture?type=small");
 							friends[i] = friend;
-							mFacebookInterface.gotAllFriends(friends);
+						
 							Log.d("Graph API sample activity", name + (" ") + id);
 						}
 					} catch (JSONException e)
 					{
 						e.printStackTrace();
 						mFacebookInterface.gotAllFriendsFailed("json error : " + e.getLocalizedMessage());
+						return;
 					}
 					graphObject.asMap();
-
+					mFacebookInterface.gotAllFriends(friends);
 				} else if (error != null) {
 					errorString = errorString + String.format("Error: %s", error.getErrorMessage());
 					mFacebookInterface.gotAllFriendsFailed(errorString);
 				}
+				
 			}
 		});
 		pendingRequest = false;
