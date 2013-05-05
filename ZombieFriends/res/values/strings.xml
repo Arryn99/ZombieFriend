@@ -14,7 +14,10 @@
     <string name="return_to_menu">Return to Main Menu</string>
     <string name="high_scores">High Scores</string>
     <string name="how_to_play">Use your finger to flick your friends away before they reach you! Each friend counts as 1 point. Once you have been hit 5 times, the game ends.</string>
-
+    <string name="login_failed_dialog_title">Login failed</string>
+    <string name="ok_button">OK</string>
+    
+    
     <style name="ButtonText">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -28,5 +31,6 @@
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">2</item>
     </style>
+        <string name="LoginToFacebook">Login To Facebook</string>
 
 </resources>

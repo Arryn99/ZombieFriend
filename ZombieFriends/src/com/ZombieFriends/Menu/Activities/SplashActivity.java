@@ -28,8 +28,8 @@ public class SplashActivity extends Activity
 				}
 				finally
 				{
-					Intent beginMenu = new Intent(SplashActivity.this, Menu.class);
-					startActivity(beginMenu);
+					Intent beginLogin = new Intent(SplashActivity.this, Login.class);
+					startActivity(beginLogin);
 				}
 			}
 		};
