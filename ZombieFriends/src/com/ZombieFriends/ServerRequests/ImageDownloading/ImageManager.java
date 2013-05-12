@@ -19,6 +19,7 @@ public class ImageManager
 	 * a complete list of all of our facebook friends
 	 */
 	FacebookFriend[] friends = null;
+	String           ID;
 
 	public void setFriends(FacebookFriend[] friends)
 	{
@@ -29,6 +30,15 @@ public class ImageManager
 		Random r = new Random();
 		int index = r.nextInt(friends.length-1);
 		friends[index].downloadAndrespondTo(context, listener);
+	}
+
+	public void getProfileImage(Context context, IDownloadBitmapListener listener) {
+			DownloadFacebookProfileImage image = new DownloadFacebookProfileImage(ID);
+			image.downloadAndrespondTo(context, listener);
+	}
+
+	public void setProfileID(String iD) {
+		ID =iD;
 	}
 	
 

@@ -11,11 +11,11 @@ import com.ZombieFriends.GameEngine.GameThread.Finger_Action;
 import com.ZombieFriends.GameEngine.Tools.Vector;
 import com.ZombieFriends.GameObjects.GameObject;
 import com.ZombieFriends.GameObjects.Player;
-import com.ZombieFriends.GameObjects.Rockets;
+import com.ZombieFriends.GameObjects.Zombies;
 
 public class RocketLauncher extends Mechanics
 {
-	LinkedList<Rockets> mRocketsInPlay = new LinkedList<Rockets>();
+	LinkedList<Zombies> mRocketsInPlay = new LinkedList<Zombies>();
 
 	float mFrequency = 5;		//distance in time between balls appearing on screen
 	Context mContext;
@@ -31,7 +31,7 @@ public class RocketLauncher extends Mechanics
 	@Override
 	public void onDraw(Canvas canvas)
 	{
-		for (Rockets ball : mRocketsInPlay) // for each ball in the list
+		for (Zombies ball : mRocketsInPlay) // for each ball in the list
 		{
 			ball.onDraw(canvas);
 		}
@@ -46,7 +46,7 @@ public class RocketLauncher extends Mechanics
 		}
 		for (int i = 0; i< mRocketsInPlay.size(); i++)		//loop through all balls that have been launched
 		{
-			Rockets rocket = mRocketsInPlay.get(i);			//get ball at position i
+			Zombies rocket = mRocketsInPlay.get(i);			//get ball at position i
 			rocket.update(dt);								//updates ball position
 
 			if (GameObject.checkForCollision(player, rocket))
@@ -77,7 +77,7 @@ public class RocketLauncher extends Mechanics
 	public void launch()
 	{
 		Random generator = new Random(System.currentTimeMillis());
-		Rockets ballToLaunch = new Rockets(mContext, new Vector(-100,generator.nextInt((int) Game.ScreenSize.getY())));
+		Zombies ballToLaunch = new Zombies(mContext, new Vector(-100,generator.nextInt((int) Game.ScreenSize.getY())));
 		ballToLaunch.setmSpeed(new Vector(50,0));
 		mRocketsInPlay.add(ballToLaunch);
 	}
@@ -98,7 +98,7 @@ public class RocketLauncher extends Mechanics
 	{
 		for (int i = 0; i <mRocketsInPlay.size(); i++)
 		{
-			Rockets ball = mRocketsInPlay.get(i);			//get ball at position i
+			Zombies ball = mRocketsInPlay.get(i);			//get ball at position i
 			ball.onTouchEvent(action, position, eventTime);
 		}
 

@@ -8,7 +8,7 @@ import android.graphics.Canvas;
 import com.ZombieFriends.R;
 import com.ZombieFriends.GameEngine.Tools.Vector;
 
-public class Cloud extends GameObject
+public class Debri extends GameObject
 {
 	Vector mSpeed = new Vector(0, 0);
 	Vector initialPos = new Vector(0, 0);
@@ -26,14 +26,15 @@ public class Cloud extends GameObject
 	}
 
 
-	public Cloud(Context context, Vector spawnPosition)
+	public Debri(Context context, Vector spawnPosition)
 	{
 		super(context);
-		int sizeX       = 100 + mRandom.nextInt(300); // pick a random size for the cloud
-		int sizeY       = 200 - mRandom.nextInt(150);
-		setmBitmapWithSize(context,  R.drawable.cloud, new Vector(sizeX,sizeY));
+		//int sizeX       = 100 + mRandom.nextInt(300); // pick a random size for the cloud
+		//int sizeY       = 200 - mRandom.nextInt(150);
+		//setmBitmapWithSize(context,  R.drawable.rock, new Vector(sizeX,sizeY));
+		setBitmap(context, R.drawable.rock);
 		mPosition = spawnPosition;
-		mAlpha = 100+ mRandom.nextInt(100);
+		mAlpha = 255;//100+ mRandom.nextInt(100);
 	}
 
 	@Override

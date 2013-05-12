@@ -1,13 +1,17 @@
 package com.ZombieFriends.GameObjects;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 import com.ZombieFriends.R;
+import com.ZombieFriends.ZombieApplication;
 import com.ZombieFriends.GameEngine.Tools.Vector;
 import com.ZombieFriends.Mechanics.Game;
+import com.rockspin.utils.ImageLoading.Downloading.IDownloadBitmapListener;
+import com.rockspin.utils.ImageLoading.Downloading.ImageToCache;
 
-public class Player extends GameObject
+public class Player extends GameObject implements IDownloadBitmapListener
 {
 	int health = 5;	//determine the health of the player
 	int mDirection = 1;	//determines player's direction (-1 is up, 1 is down)
@@ -18,7 +22,10 @@ public class Player extends GameObject
 
 		setBitmap(context, R.drawable.plane);
 		mPosition.setX(Game.ScreenSize.getX()-getSize().getX() - 5);		//position player to far right of screen
-	}
+
+		ZombieApplication.getApplication(context).getImageManager().getProfileImage(context, this);
+
+}
 
 	@Override
 	public	void onDraw(Canvas canvas)
@@ -55,6 +62,12 @@ public class Player extends GameObject
 		}
 		
 		keepObjectOnScreen();
+	}
+
+	@Override
+	public void gotBitmapForImage(Bitmap bitmap, ImageToCache cache) {
+		mPosition = new Vector (Game.ScreenSize.getX() - bitmap.getWidth(), Game.ScreenSize.getY() - bitmap.getHeight());
+		this.mBitmap = bitmap;
 	}
 
 }

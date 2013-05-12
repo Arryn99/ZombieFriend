@@ -43,8 +43,8 @@ public class Menu extends Activity
 		mButtonHelpScreen = (Button) findViewById(R.id.helpGame);
 
 		//add 20 clouds
-		for(int i =0; i < 20; i++)
-			newCloudAnimation();
+	//	for(int i =0; i < 20; i++)
+		//	newCloudAnimation();
 
 		mButtonStartGame.setOnClickListener(new OnClickListener()
 		{
@@ -92,7 +92,7 @@ public class Menu extends Activity
 
 		final ImageView cloudView = new ImageView(this); // create an image view to represent the cloud
 		cloudView.setLayoutParams( new RelativeLayout.LayoutParams(sizeX, sizeY)); // set its size
-		cloudView.setImageResource(R.drawable.cloud);//set its image
+		cloudView.setImageResource(R.drawable.rock);//set its image
 		mMainLayout.addView(cloudView, 1); // add at 1 so just above background very back
 
 		// get screen size so we know how far to move our clouds

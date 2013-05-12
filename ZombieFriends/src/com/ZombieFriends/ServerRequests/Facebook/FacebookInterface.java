@@ -24,4 +24,15 @@ public interface FacebookInterface
 	 * @param error a string representing the reason the request failed
 	 */
 	public void gotAllFriendsFailed(String error);
+	
+	/**
+	 * Called when the user has downloaded their ID
+	 */
+	public void gotProfileID(String ID);
+	
+	/**
+	 * Called when the user has not downloaded their ID
+	 * @param string 
+	 */
+	public void gotProfileIDFailed(String string);
 }

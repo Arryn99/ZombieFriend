@@ -53,7 +53,7 @@ public class Login extends FacebookActivity
 	public void signInSuccess() {
 		// TODO Auto-generated method stub
 		super.signInSuccess();
-		getAllFriends();
+		getProfileID();
 		mDialog = ProgressDialog.show(this, "", "Loading. Please wait...", true);
 	}
 	
@@ -92,5 +92,15 @@ public class Login extends FacebookActivity
 		finish();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.ZombieFriends.ServerRequests.Facebook.FacebookActivity#gotProfileID(java.lang.String)
+	 */
+	@Override
+	public void gotProfileID(String ID) {
+		// TODO Auto-generated method stub
+		super.gotProfileID(ID);
+		getAllFriends();
+		ZombieApplication.getApplication(this).getImageManager().setProfileID(ID);
+	}
 	
 }

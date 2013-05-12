@@ -16,6 +16,7 @@ public abstract class GameObject
 
 	Bitmap  mBitmap;		//this represents the sprite
 	Vector  mPosition;		//this represents the current position
+
 	Vector  mPreviousPosition = new Vector(0,0);
 	boolean mTouchBeganOnGameObject; //set to true if touch starts on game object
 	long    mPreviousTouchTime;
@@ -32,9 +33,10 @@ public abstract class GameObject
 	{
 		mBitmap = BitmapFactory.decodeResource(context.getResources(),resourceID);
 	}
-	
+
 	public void setBitmap( Bitmap bitmap)
 	{
+	
 		mBitmap = bitmap;
 	}
 
@@ -282,4 +284,12 @@ public abstract class GameObject
 		mBitmap = null;			//lets garbage collector know that it can be cleaned up
 	}
 
+	
+	public Vector getPosition() {
+		return mPosition;
+	}
+
+	public void setPosition(Vector mPosition) {
+		this.mPosition = mPosition;
+	}
 }

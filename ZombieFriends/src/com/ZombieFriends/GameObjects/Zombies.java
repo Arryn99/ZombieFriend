@@ -1,5 +1,7 @@
 package com.ZombieFriends.GameObjects;
 
+import java.util.Random;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -11,12 +13,14 @@ import com.ZombieFriends.Mechanics.Game;
 import com.rockspin.utils.ImageLoading.Downloading.IDownloadBitmapListener;
 import com.rockspin.utils.ImageLoading.Downloading.ImageToCache;
 
-public class Rockets extends GameObject implements IDownloadBitmapListener
+public class Zombies extends GameObject implements IDownloadBitmapListener
 {
 
 	boolean flicked = false;
 	boolean appeared = false;
 	boolean loaded   = false;
+	
+	Vector mSpeed = new Vector(0, 0);
 
 	public boolean isAppeared() {
 		return appeared;
@@ -48,21 +52,12 @@ public class Rockets extends GameObject implements IDownloadBitmapListener
 		flicked = false;
 	}
 
-	//@Override
-	//public void onMoveInto(Vector touchPos, Vector velocity)
-	//{
-	//super.onMoveInto(touchPos, velocity);
-	//mSpeed = velocity;
-	//}
 
-	Vector mSpeed = new Vector(0, 0);
-	Vector initialPos = new Vector(0, 0);
-
-	public Rockets(Context context, Vector spawnPosition)
+	public Zombies(Context context, Vector spawnPosition)
 	{
 		super(context);
 		setBitmap(context, R.drawable.rocket);
-		mPosition = spawnPosition;
+		mPosition = Vector.sub(spawnPosition, new Vector(1000, 0));
 
 		ZombieApplication.getApplication(context).getImageManager().getRandomFriendImage(context, this);
 
@@ -74,10 +69,16 @@ public class Rockets extends GameObject implements IDownloadBitmapListener
 		super.onTouch();
 	}
 
+	Random randomAngle = new Random();
+
 	@Override
 	public	void onDraw(Canvas canvas)
 	{
+		canvas.save();
+		canvas.rotate(randomAngle.nextFloat()*10,getPosition().getX() + getSize().getX()/2,
+				getPosition().getY() + getSize().getY()/2);
 		super.onDraw(canvas);
+		canvas.restore();
 	}
 
 	@Override
@@ -96,6 +97,7 @@ public class Rockets extends GameObject implements IDownloadBitmapListener
 
 	@Override
 	public void gotBitmapForImage(Bitmap bitmap, ImageToCache cache) {
+		mPosition  = new Vector(-bitmap.getWidth(), mPosition.getY() );
 		this.setBitmap(bitmap);
 		loaded = true;
 	}

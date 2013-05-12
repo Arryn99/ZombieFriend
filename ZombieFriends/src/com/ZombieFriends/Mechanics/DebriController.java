@@ -9,17 +9,17 @@ import android.graphics.Canvas;
 
 import com.ZombieFriends.GameEngine.GameThread.Finger_Action;
 import com.ZombieFriends.GameEngine.Tools.Vector;
-import com.ZombieFriends.GameObjects.Cloud;
+import com.ZombieFriends.GameObjects.Debri;
 
-public class CloudController extends Mechanics
+public class DebriController extends Mechanics
 {
-	LinkedList<Cloud> mCloudsInPlay = new LinkedList<Cloud>();
+	LinkedList<Debri> mCloudsInPlay = new LinkedList<Debri>();
 
 	float mFrequency = 5;		//distance in time between balls appearing on screen
 	Context mContext;
 	float mTimeSinceLastLaunch = 0;
 
-	public CloudController(Context context, float frequency)
+	public DebriController(Context context, float frequency)
 	{
 		super(context);
 		mContext = context;
@@ -29,7 +29,7 @@ public class CloudController extends Mechanics
 	@Override
 	public void onDraw(Canvas canvas)
 	{
-		for (Cloud cloud : mCloudsInPlay) // for each ball in the list
+		for (Debri cloud : mCloudsInPlay) // for each ball in the list
 		{
 			cloud.onDraw(canvas);
 		}
@@ -44,7 +44,7 @@ public class CloudController extends Mechanics
 		}
 		for (int i = 0; i< mCloudsInPlay.size(); i++)		//loop through all balls that have been launched
 		{
-			Cloud cloud = mCloudsInPlay.get(i);			//get ball at position i
+			Debri cloud = mCloudsInPlay.get(i);			//get ball at position i
 			cloud.update(dt);								//updates ball position
 
 
@@ -67,7 +67,7 @@ public class CloudController extends Mechanics
 	public void addCloud()
 	{
 		Random generator = new Random(System.currentTimeMillis());
-		Cloud cloud = new Cloud(mContext, new Vector(-500,generator.nextInt((int) Game.ScreenSize.getY())));
+		Debri cloud = new Debri(mContext, new Vector(-500,generator.nextInt((int) Game.ScreenSize.getY())));
 		cloud.setmSpeed(new Vector(50,0));
 		mCloudsInPlay.add(cloud);
 	}
@@ -88,7 +88,7 @@ public class CloudController extends Mechanics
 	{
 		for (int i = 0; i <mCloudsInPlay.size(); i++)
 		{
-			Cloud cloud = mCloudsInPlay.get(i);			//get ball at position i
+			Debri cloud = mCloudsInPlay.get(i);			//get ball at position i
 			cloud.onTouchEvent(action, position, eventTime);
 		}
 

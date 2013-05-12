@@ -61,16 +61,16 @@ class FacebookConnection
 		if (session.isOpened()) {
 			mFacebookInterface.signInSuccess();
 		} else {
-			 StatusCallback callback = new StatusCallback() {
-	                public void call(Session session, SessionState state, Exception exception) {
-	                    if (exception != null) {
-	                        FacebookConnection.this.session = createSession(activity);
-	                    }
-	                    mFacebookInterface.signInSuccess();
-	                }
-	            };
-	            pendingRequest = true;
-	            this.session.openForRead(new Session.OpenRequest(activity).setCallback(callback));
+			StatusCallback callback = new StatusCallback() {
+				public void call(Session session, SessionState state, Exception exception) {
+					if (exception != null) {
+						FacebookConnection.this.session = createSession(activity);
+					}
+					mFacebookInterface.signInSuccess();
+				}
+			};
+			pendingRequest = true;
+			this.session.openForRead(new Session.OpenRequest(activity).setCallback(callback));
 		}
 	}
 
@@ -103,7 +103,7 @@ class FacebookConnection
 							FacebookFriend friend = new FacebookFriend(name, id, "https://graph.facebook.com/" +
 									id + "/picture?type=small");
 							friends[i] = friend;
-						
+
 							Log.d("Graph API sample activity", name + (" ") + id);
 						}
 					} catch (JSONException e)
@@ -118,56 +118,89 @@ class FacebookConnection
 					errorString = errorString + String.format("Error: %s", error.getErrorMessage());
 					mFacebookInterface.gotAllFriendsFailed(errorString);
 				}
-				
+
 			}
 		});
 		pendingRequest = false;
 		r.executeAsync();
 	}
 
-	/**
-	 * creates a facebook session object if none exists already
-	 * @param context A android context
-	 * @return a valid session
-	 */
-	private Session createSession(Context context) {
-		Session activeSession = Session.getActiveSession();
-		if (activeSession == null || activeSession.getState().isClosed()) {
-			activeSession = new Session.Builder(context).setApplicationId(applicationId).build();
-			Session.setActiveSession(activeSession);
+	void getloggedInUsersID(){
+		String requestIdsText = "/me";
+		Request r = new Request(session, requestIdsText, null, null, new Request.Callback() {
+			String id;
+			public void onCompleted(Response response) {
+				GraphObject graphObject = response.getGraphObject();
+				FacebookRequestError error = response.getError();
+				String errorString = "";
+				if (graphObject != null) {
+					JSONObject object = graphObject.getInnerJSONObject();
+					try
+					{
+						String name = object.getString("name");
+						id = object.getString("id");
+						Log.d("Graph API sample activity", name + (" ") + id);
+				} catch (JSONException e)
+				{
+					e.printStackTrace();
+					mFacebookInterface.gotProfileIDFailed("json error : " + e.getLocalizedMessage());
+					return;
+				}
+				mFacebookInterface.gotProfileID(id);
+			} else if (error != null) {
+				errorString = errorString + String.format("Error: %s", error.getErrorMessage());
+				mFacebookInterface.gotProfileIDFailed(errorString);
+			}
+
 		}
-		return activeSession;
-	}
+	});
+		pendingRequest = false;
+		r.executeAsync();
+} 
 
-	//************************************** activity call backs *************************************//
-	/**
-	 * Call thsi function from onActivityResult in an activity to manage logins
-	 * @param activity
-	 * @param requestCode
-	 * @param resultCode
-	 * @param data
-	 */
-	void onActivityResult(Activity activity ,int requestCode, int resultCode, Intent data) {
-		if (Session.getActiveSession().onActivityResult(activity, requestCode, resultCode, data) && pendingRequest && session.getState().isOpened()) {
-			mFacebookInterface.signInSuccess();
-		}
+/**
+ * creates a facebook session object if none exists already
+ * @param context A android context
+ * @return a valid session
+ */
+private Session createSession(Context context) {
+	Session activeSession = Session.getActiveSession();
+	if (activeSession == null || activeSession.getState().isClosed()) {
+		activeSession = new Session.Builder(context).setApplicationId(applicationId).build();
+		Session.setActiveSession(activeSession);
 	}
+	return activeSession;
+}
 
-	/**
-	 * call this function form onRestoreInstanceState to restore any pending requests
-	 * @param savedInstanceState
-	 */
-	void onRestoreInstanceState(Bundle savedInstanceState) {
-		pendingRequest = savedInstanceState.getBoolean(PENDING_REQUEST_BUNDLE_KEY, pendingRequest);
+//************************************** activity call backs *************************************//
+/**
+ * Call this function from onActivityResult in an activity to manage logins
+ * @param activity
+ * @param requestCode
+ * @param resultCode
+ * @param data
+ */
+void onActivityResult(Activity activity ,int requestCode, int resultCode, Intent data) {
+	if (Session.getActiveSession().onActivityResult(activity, requestCode, resultCode, data) && pendingRequest && session.getState().isOpened()) {
+		mFacebookInterface.signInSuccess();
 	}
+}
 
-	/**
-	 * Called when a activity is recreated.
-	 * @param outState
-	 */
-	void onSaveInstanceState(Bundle outState) {
-		outState.putBoolean(PENDING_REQUEST_BUNDLE_KEY, pendingRequest);
-	}
+/**
+ * call this function form onRestoreInstanceState to restore any pending requests
+ * @param savedInstanceState
+ */
+void onRestoreInstanceState(Bundle savedInstanceState) {
+	pendingRequest = savedInstanceState.getBoolean(PENDING_REQUEST_BUNDLE_KEY, pendingRequest);
+}
 
-	//************************************** /activity call backs *************************************//
+/**
+ * Called when a activity is recreated.
+ * @param outState
+ */
+void onSaveInstanceState(Bundle outState) {
+	outState.putBoolean(PENDING_REQUEST_BUNDLE_KEY, pendingRequest);
+}
+
+//************************************** /activity call backs *************************************//
 }

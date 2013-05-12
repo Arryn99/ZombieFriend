@@ -73,5 +73,9 @@ public class Vector
 		product.y = a.y / b;
 		return product;
 	}
+	
+	public static Vector Zero(){
+		return new Vector(0,0);
+	}
 
 }

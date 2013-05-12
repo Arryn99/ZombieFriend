@@ -30,15 +30,6 @@
             android:text="@string/main_menu"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/highScores"
-            style="@style/ButtonText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/clouddark"
-            android:text="@string/LoginToFacebook"
-            android:textColor="#000000" />
     </LinearLayout>
 
     <ImageButton
@@ -48,8 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout1"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/clouddark"
-        android:src="@drawable/man"
+        android:background="@android:color/transparent"
+        android:src="@drawable/facebookloginbutton"
         android:text="@string/play_game" />
 
 </RelativeLayout>

@@ -3,4 +3,5 @@
     <issue id="NewApi">
         <ignore path="src\com\TeachAttack\GameEngine\GameView.java" />
     </issue>
+    <issue id="WrongCall" severity="ignore" />
 </lint>

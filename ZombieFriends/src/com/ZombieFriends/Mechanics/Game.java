@@ -25,7 +25,8 @@ public class Game extends GameThread
 	Background   mBackground;
 	Player       mPlayer;
 	RocketLauncher mBallLauncher;
-	CloudController        mCloudController;
+	DebriController        mCloudController;
+	RoadController         mRoadController;
 	
 	
 	public Game(SurfaceHolder surfaceHolder, GameView gamePanel, RelativeLayout root)
@@ -35,7 +36,8 @@ public class Game extends GameThread
 		mBackground = new Background(mContext);
 		mPlayer = new Player (mContext);
 		mBallLauncher = new RocketLauncher(mContext, 2);
-		mCloudController = new CloudController(mContext, 1);
+		mCloudController = new DebriController(mContext, 1);
+		mRoadController   = new RoadController(mContext);
 		
 		
 	}
@@ -62,9 +64,10 @@ public class Game extends GameThread
 	public void onDraw(Canvas canvas)
 	{
 		mBackground.onDraw(canvas);
+		mRoadController.onDraw(canvas);
+		//mCloudController.onDraw(canvas);
 		mPlayer.onDraw(canvas);
 		mBallLauncher.onDraw(canvas);
-		mCloudController.onDraw(canvas);
 	}
 
 	/* (non-Javadoc)
@@ -77,7 +80,7 @@ public class Game extends GameThread
 		super.update(dt);
 		mPlayer.update(dt);
 		mBallLauncher.update(dt, mPlayer);
-		mCloudController.update(dt);
+		//mCloudController.update(dt);
 	}
 
 	@Override

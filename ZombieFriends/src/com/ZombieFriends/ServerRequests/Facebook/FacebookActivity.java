@@ -68,6 +68,13 @@ public class FacebookActivity extends Activity implements FacebookInterface
 	public void getAllFriends(){
 		mFacebookConnection.getFriends();
 	}
+	
+	/**
+	 * retrieves the facebook users profile ID
+	 */
+	public void getProfileID(){
+		mFacebookConnection.getloggedInUsersID();
+	}
 
 	/* (non-Javadoc)
 	 * @see com.ZombieFriends.ServerRequests.Facebook.FacebookInterface#signInSuccess()
@@ -104,6 +111,18 @@ public class FacebookActivity extends Activity implements FacebookInterface
 	@Override
 	public void gotAllFriendsFailed(String error)
 	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void gotProfileID(String ID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void gotProfileIDFailed(String string) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -32,8 +32,7 @@
     <Button
         android:id="@+id/buttonRequest"
         android:layout_width="122dp"
-        android:layout_height="wrap_content"
-        android:text="fucking work you dicks" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/textViewResults"
