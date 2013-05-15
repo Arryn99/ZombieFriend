@@ -4,8 +4,8 @@ import java.util.Random;
 
 import android.content.Context;
 
+import com.ImageHandler.utils.ImageLoading.Downloading.IDownloadBitmapListener;
 import com.ZombieFriends.ServerRequests.FacebookFriend;
-import com.rockspin.utils.ImageLoading.Downloading.IDownloadBitmapListener;
 
 /**
  * Class that manages all of the image retrival within out application

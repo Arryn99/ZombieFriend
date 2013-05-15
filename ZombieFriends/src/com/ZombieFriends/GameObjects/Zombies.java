@@ -6,12 +6,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
+import com.ImageHandler.utils.ImageLoading.Downloading.IDownloadBitmapListener;
+import com.ImageHandler.utils.ImageLoading.Downloading.ImageToCache;
 import com.ZombieFriends.R;
 import com.ZombieFriends.ZombieApplication;
 import com.ZombieFriends.GameEngine.Tools.Vector;
 import com.ZombieFriends.Mechanics.Game;
-import com.rockspin.utils.ImageLoading.Downloading.IDownloadBitmapListener;
-import com.rockspin.utils.ImageLoading.Downloading.ImageToCache;
 
 public class Zombies extends GameObject implements IDownloadBitmapListener
 {

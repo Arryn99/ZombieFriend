@@ -1,7 +1,7 @@
 package com.ZombieFriends.ServerRequests.ImageDownloading;
 
+import com.ImageHandler.utils.ImageLoading.Downloading.FromWeb.ImageToDownload;
 import com.ZombieFriends.ServerRequests.FacebookFriend;
-import com.rockspin.utils.ImageLoading.Downloading.FromWeb.ImageToDownload;
 
 
 public class DownloadFacebookProfileImage extends ImageToDownload{

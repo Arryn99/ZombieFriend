@@ -2,8 +2,8 @@ package com.ZombieFriends;
 
 import android.content.Context;
 
+import com.ImageHandler.ImageApplication;
 import com.ZombieFriends.ServerRequests.ImageDownloading.ImageManager;
-import com.rockspin.ImageApplication;
 
 public class ZombieApplication extends ImageApplication{
 

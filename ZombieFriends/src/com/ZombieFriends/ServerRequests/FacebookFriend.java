@@ -1,11 +1,9 @@
 package com.ZombieFriends.ServerRequests;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 
+import com.ImageHandler.utils.ImageLoading.Downloading.IDownloadBitmapListener;
 import com.ZombieFriends.ServerRequests.ImageDownloading.DownloadFacebookProfileImage;
-import com.rockspin.utils.ImageLoading.Downloading.IDownloadBitmapListener;
-import com.rockspin.utils.ImageLoading.Downloading.ImageToCache;
 
 /**
  * A POJO that holds details about all of my facebook friends
